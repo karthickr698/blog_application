@@ -1,0 +1,39 @@
+CREATE TABLE user (
+    id INT NOT NULL AUTO_INCREMENT, 
+    name VARCHAR(255) NOT NULL, 
+    email VARCHAR(10) NOT NULL, 
+    password VARCHAR(30) NOT NULL,
+    salt VARCHAR(10) NOT NULL, 
+    image VARCHAR(30) NULL, 
+    created_at TIMESTAMP NOT NULL, 
+    PRIMARY KEY(id));
+
+
+CREATE TABLE catagory (
+    id INT NOT NULL AUTO_INCREMENT, 
+    catagories VARCHAR(255) NOT NULL, 
+    PRIMARY KEY(id));
+
+
+CREATE TABLE blog (
+    id INT NOT NULL AUTO_INCREMENT, 
+    title VARCHAR(255) NOT NULL, 
+    content VARCHAR(255) NOT NULL, 
+    created_at TIMESTAMP NOT NULL, 
+    user_id int, 
+    catagory_id int, 
+    PRIMARY KEY(id),
+    FOREIGN KEY(user_id) REFERENCES user(id), 
+    FOREIGN KEY(catagory_id) REFERENCES catagory(id));
+
+CREATE TABLE comments(
+    id INT NOT NULL AUTO_INCREMENT, 
+    comment VARCHAR(255) NOT NULL, 
+    created_at TIMESTAMP NOT NULL, 
+    user_id INT, 
+    category_id INT, 
+    blog_id INT, 
+    PRIMARY KEY(id),
+    FOREIGN KEY(user_id) REFERENCES user(id), 
+    FOREIGN KEY(category_id) REFERENCES catagory(id), 
+    FOREIGN KEY(blog_id) REFERENCES blog(id));
